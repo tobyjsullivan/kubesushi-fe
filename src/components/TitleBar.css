@@ -1,0 +1,38 @@
+.title-bar {
+  background-color: #3d3d3d;
+  color: #fff;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.title-bar__global-menu {
+  display: flex;
+  width: 50%;
+  margin: 0;
+  padding: 0;
+}
+
+.title-bar__menu-item {
+  display: inline-block;
+  text-align: left;
+}
+
+.title-bar__button {
+  height: 60px;
+  padding: 12px;
+  cursor: pointer;
+  stroke: #fff;
+  fill: #fff;
+  border: 1px solid #3d3d3d;
+}
+
+.title-bar__button:hover {
+  background-color: #fff;
+  color: #3d3d3d;
+  stroke: #3d3d3d;
+  fill: #3d3d3d;
+}
+
+.title-bar__logo-box {
+  width: 60px;
+}

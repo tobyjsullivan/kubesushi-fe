@@ -1,0 +1,32 @@
+.logo {
+  height: 100%;
+}
+
+.logo__svg {
+  height: 100%;
+  width: auto;
+  fill: #fff;
+  stroke: #fff;
+  font-style:normal;
+  font-weight:normal;
+  font-size:12px;
+  font-family:Dialog;
+  color-interpolation:auto;
+  fill-opacity:1;
+  stroke-width:1;
+  stroke-linecap:square;
+  stroke-linejoin:miter;
+  stroke-miterlimit:10;
+  stroke-dasharray:none;
+  stroke-dashoffset:0;
+  stroke-opacity:1;
+  color-rendering:auto;
+  image-rendering:auto;
+  shape-rendering:auto;
+  text-rendering:auto;
+}
+
+.logo__svg--inverted {
+  fill: #3d3d3d;
+  stroke: #3d3d3d;
+}

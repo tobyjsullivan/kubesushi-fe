@@ -1,0 +1,12 @@
+.launch-button {
+  background-color: #3d3d3d;
+  border: 1px solid #3d3d3d;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 8px;
+}
+
+.launch-button:hover {
+  background-color: #fff;
+  color: #3d3d3d;
+}

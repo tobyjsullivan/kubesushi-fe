@@ -1,0 +1,44 @@
+.form {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+}
+
+.form__control-group {
+  max-width: 350px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 17px;
+}
+
+.form__label {
+  display: block;
+}
+
+.form__input {
+  display: block;
+}
+
+.launch-flow__add-var-button {
+  background-color: #3d3d3d;
+  border: 1px solid #3d3d3d;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 8px;
+}
+
+.launch-flow__add-var-button:hover {
+  background-color: #fff;
+  color: #3d3d3d;
+}
+
+.launch-flow__size-summary {
+  width: 350px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left; 
+}
+
