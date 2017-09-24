@@ -6,23 +6,35 @@ import TitleBar from '../components/TitleBar';
 import './LaunchFlow.css';
 
 const containerSizes = {
-  centicore: {
-    label: 'Centicore',
+  alpha: {
+    label: 'Alpha',
     mcpu: 10,
-    mem: 60,
-    cost: 100
+    mem: 40,
+    cost: 40
   },
-  decicore: {
-    label: 'Decicore',
+  bravo: {
+    label: 'Bravo',
+    mcpu: 50,
+    mem: 200,
+    cost: 200
+  },
+  charlie: {
+    label: 'Charlie',
     mcpu: 100,
-    mem: 600,
-    cost: 1000
+    mem: 400,
+    cost: 400
   },
-  unicore: {
-    label: 'Unicore',
+  delta: {
+    label: 'Delta',
     mcpu: 1000,
-    mem: 6000,
-    cost: 10000
+    mem: 4000,
+    cost: 4000
+  },
+  echo: {
+    label: 'Echo',
+    mcpu: 2000,
+    mem: 8000,
+    cost: 8000
   }
 }
 
@@ -37,7 +49,7 @@ function formatPrice(cost) {
 class LaunchFlow extends Component {
   state = {
     numEnvVars: 0,
-    selectedSize: 'centicore',
+    selectedSize: Object.keys(containerSizes)[0],
     replicas: 1
   }
 
@@ -51,30 +63,36 @@ class LaunchFlow extends Component {
     const size = containerSizes[sizeKey];
 
     return (
-      <table className="launch-flow__size-summary">
-        <tbody>
-          <tr>
-            <td><strong>Reserved CPU</strong></td>
-            <td>{size.mcpu} mCPU</td>
-          </tr>
-          <tr>
-            <td><strong>Reserved Memory</strong></td>
-            <td>{size.mem} MB</td>
-          </tr>
-        </tbody>
-      </table>
+      <div className="launch-flow__size-summary">
+        <div className="form__control-group">
+          <span className="form__label">
+            <strong>Reserved CPU</strong>
+          </span>
+          <span className="form__label">
+            {size.mcpu} mCPU
+          </span>
+        </div>
+        <div className="form__control-group">
+          <span className="form__label">
+            <strong>Reserved Memory</strong>
+          </span>
+          <span className="form__label">
+            {size.mem} MB
+          </span>
+        </div>
+      </div>
     );
   }
 
   _renderPriceEstimate = () => (
-    <table className="launch-flow__size-summary">
-        <tbody>
-          <tr>
-            <td><strong>Estimated Cost</strong></td>
-            <td>{formatPrice(estimatedCost(this.state.selectedSize, this.state.replicas))}/month</td>
-          </tr>
-        </tbody>
-    </table>
+    <div className="form__control-group">
+      <p className="form__label">
+        <strong>Estimated Cost</strong>
+      </p>
+      <p className="form__label">
+        {formatPrice(estimatedCost(this.state.selectedSize, this.state.replicas))}/month
+      </p>
+    </div>
   )
 
   render() {
@@ -99,52 +117,54 @@ class LaunchFlow extends Component {
     return (
       <div className="launch-flow">
         <TitleBar />
-        <h1>Launch a container</h1>
-        <div className="form">
-          <div className="form__control-group">
-            <label className="form__label">Image</label>
-            <input className="form__input" type="text" />
+        <div className="launch-flow__content-area">
+          <h1>Launch a container</h1>
+          <div className="form">
+            <div className="form__control-group">
+              <label className="form__label">Image</label>
+              <input className="form__input" type="text" />
+            </div>
+            <div className="form__control-group">
+              <h2>Environment variables</h2>
+            </div>
+            {envVarList}
+            <div className="form__control-group">
+              <button
+                onClick={this._handleClickAddEnvVar}
+                className="launch-flow__add-var-button">+ Add Env Var</button>
+            </div>
+            <div className="form__control-group">
+              <h2>Container resources</h2>
+            </div>
+            <div className="form__control-group">
+              <label className="form__label">Container Size</label>
+              <select
+                value={this.state.selectedSize}
+                onChange={e => this._handleSizeChanged(e.target.value)}
+                className="form__input">
+                {sizeOptions}
+              </select>
+            </div>
+            <div className="form__control-group">
+              {this._renderSizeSummary(this.state.selectedSize)}
+            </div>
+            <div className="form__control-group">
+              <label className="form__label">Replicas</label>
+              <input
+                type="number"
+                defaultValue={this.state.replicas}
+                onChange={e => this._handleReplicasChanged(e.target.value)}
+                className="form__input" />
+            </div>
+            <div className="form__control-group">
+              {this._renderPriceEstimate()}
+            </div>
           </div>
-          <div className="form__control-group">
-            <h2>Environment variables</h2>
-          </div>
-          {envVarList}
-          <div className="form__control-group">
+          <Link to="/dashboard">
             <button
-              onClick={this._handleClickAddEnvVar}
-              className="launch-flow__add-var-button">+ Add Env Var</button>
-          </div>
-          <div className="form__control-group">
-            <h2>Container resources</h2>
-          </div>
-          <div className="form__control-group">
-            <label className="form__label">Container Size</label>
-            <select
-              value={this.state.selectedSize}
-              onChange={e => this._handleSizeChanged(e.target.value)}
-              className="form__input">
-              {sizeOptions}
-            </select>
-          </div>
-          <div className="form__control-group">
-            {this._renderSizeSummary(this.state.selectedSize)}
-          </div>
-          <div className="form__control-group">
-            <label className="form__label">Replicas</label>
-            <input
-              type="number"
-              defaultValue={this.state.replicas}
-              onChange={e => this._handleReplicasChanged(e.target.value)}
-              className="form__input" />
-          </div>
-          <div className="form__control-group">
-            {this._renderPriceEstimate()}
-          </div>
+              className="launch-flow__add-var-button">Launch Now</button>
+          </Link>
         </div>
-        <Link to="/dashboard">
-          <button
-            className="launch-flow__add-var-button">Launch Now</button>
-        </Link>
       </div>
     );
   }

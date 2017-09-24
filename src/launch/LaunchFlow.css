@@ -4,6 +4,10 @@
   flex-direction: column;
 }
 
+.launch-flow__content-area {
+  padding: 12px;
+}
+
 .form__control-group {
   max-width: 350px;
   width: 100%;
@@ -16,6 +20,7 @@
 
 .form__label {
   display: block;
+  width: auto;
 }
 
 .form__input {
